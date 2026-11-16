@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+# 내부 인사 데이터 — 저장소에 올리지 않는다
+public/*.xlsx
+*.xlsx
+*.xls
+*.tsbuildinfo
