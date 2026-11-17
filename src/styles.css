@@ -7,6 +7,7 @@
   --grid: #e8ebf0;
   --hover: rgba(42, 120, 214, 0.08);
   --accent: #2a78d6;
+  --btn: #2468c4; /* 흰 글자 대비 5.4:1 */
   --banner-bg: #fdecec;
   --banner-text: #9b1c1c;
   --c1: #2a78d6;
@@ -27,6 +28,7 @@
     --grid: #262e3a;
     --hover: rgba(57, 135, 229, 0.15);
     --accent: #3987e5;
+    --btn: #2b6fd0; /* 흰 글자 대비 4.9:1 */
     --banner-bg: #3a1d1d;
     --banner-text: #f5b5b5;
     --c1: #3987e5;
@@ -66,7 +68,7 @@ select, input[type='search'] {
   font: inherit;
 }
 .btn {
-  background: var(--accent);
+  background: var(--btn);
   color: #fff;
   border: 0;
   border-radius: 6px;
