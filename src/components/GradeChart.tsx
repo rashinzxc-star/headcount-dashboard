@@ -10,7 +10,7 @@ export default function GradeChart({ totals, scope }: { totals: GradeCounts; sco
     <div className="card">
       <h2>직급별 인원 구성 <small>{scope}</small></h2>
       <ResponsiveContainer width="100%" height={GRADES.length * 34 + 50}>
-        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 90, bottom: 4, left: 8 }}>
+        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 120, bottom: 4, left: 8 }}>
           <CartesianGrid horizontal={false} stroke="var(--grid)" />
           <XAxis type="number" stroke="var(--muted)" tick={{ fill: 'var(--muted)', fontSize: 12 }} />
           <YAxis
@@ -30,14 +30,23 @@ export default function GradeChart({ totals, scope }: { totals: GradeCounts; sco
             ]}
           />
           <Bar dataKey="value" fill="var(--c1)" radius={[0, 3, 3, 0]}>
+            {/* 기본 라벨은 막대 폭에 맞춰 줄바꿈되므로 한 줄 <text>로 직접 그린다 */}
             <LabelList
               dataKey="value"
-              position="right"
-              fill="var(--text)"
-              fontSize={12}
-              formatter={(v: number) => {
-                const p = sum ? ((v / sum) * 100).toFixed(1) : '0.0';
-                return `${v.toLocaleString()} (${p}%)`;
+              content={(p: { x?: number | string; y?: number | string; width?: number | string; height?: number | string; value?: number | string }) => {
+                const v = Number(p.value ?? 0);
+                const pct = sum ? ((v / sum) * 100).toFixed(1) : '0.0';
+                return (
+                  <text
+                    x={Number(p.x) + Number(p.width) + 6}
+                    y={Number(p.y) + Number(p.height) / 2}
+                    dy={4}
+                    fontSize={12}
+                    fill="var(--text)"
+                  >
+                    {`${v.toLocaleString()} (${pct}%)`}
+                  </text>
+                );
               }}
             />
           </Bar>

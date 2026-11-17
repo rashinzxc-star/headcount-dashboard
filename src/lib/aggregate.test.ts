@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { utils, write } from 'xlsx';
-import { byBonbu, filterByBonbu, gradeTotals, summarize } from './aggregate';
+import { bonbuNames, byBonbu, filterByBonbu, gradeTotals, summarize } from './aggregate';
 import { ParseError, parseWorkbook } from './parseWorkbook';
 
 const file = readFileSync(resolve(__dirname, '../../public/인원현황.xlsx'));
@@ -87,5 +87,12 @@ describe('aggregate', () => {
     expect(get('기술본부 · 인프라공사팀')).toBe(185);
     expect(get('기술본부 (그 외)') + 369 + 185).toBe(609);
     expect(summarize(filterByBonbu(rows, '기술본부 · 건축공사팀')).total).toBe(369);
+  });
+
+  it('차트에서 선택 가능한 모든 행 키가 드롭다운 목록에 있다', () => {
+    const opts = bonbuNames(rows);
+    for (const b of byBonbu(rows)) expect(opts).toContain(b.name);
+    expect(opts).toContain('기술본부');
+    expect(new Set(opts).size).toBe(opts.length);
   });
 });

@@ -91,7 +91,7 @@ export default function App() {
         <div className="card empty-state">{error ? '표시할 데이터가 없습니다.' : '불러오는 중…'}</div>
       ) : (
         <>
-          <KpiCards summary={summary} />
+          <KpiCards summary={summary} filtered={selected !== null} />
           <div className="grid-2">
             <BonbuChart stats={stats} selected={selected} onSelect={setSelected} />
             <GradeChart totals={totals} scope={selected ?? '전체'} />

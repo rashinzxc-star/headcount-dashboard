@@ -33,7 +33,7 @@ export default function BonbuChart({ stats, selected, onSelect }: Props) {
         <BarChart
           data={data}
           layout="vertical"
-          margin={{ top: 4, right: 40, bottom: 4, left: 8 }}
+          margin={{ top: 4, right: 8, bottom: 4, left: 8 }}
           style={{ cursor: 'pointer' }}
           onClick={(state) => toggle(state?.activeLabel)}
         >

@@ -94,7 +94,8 @@ export function bonbuNames(rows: TeamRow[]): string[] {
       seen.add(bonbu);
       out.push(bonbu);
     }
-    if (b.name !== bonbu && !b.name.endsWith('(그 외)')) out.push(b.name);
+    // 차트 행으로 선택 가능한 모든 키가 드롭다운에도 있어야 선택 상태가 어긋나지 않는다
+    if (b.name !== bonbu) out.push(b.name);
   }
   return out;
 }
